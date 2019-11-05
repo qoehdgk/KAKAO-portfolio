@@ -1,0 +1,83 @@
+23d22
+< 	char c_name[20];
+39a39,40
+> int bok=0;
+> 
+51a53
+> 	char bann_buf[MAXLINE];
+56a59
+> 	int vote_num = 0;
+63d65
+< 	memset(User-> c_name , 0, sizeof(User->c_name));
+121a124,125
+> 
+> 								
+123,125c127,166
+< 					bufmsg[nbyte] = 0;
+< 					printf("%s \n", bufmsg);
+< 					memset(bufmsg,0,MAXLINE);
+---
+> 
+> 					if(!strcmp(bufmsg,"vote")){
+> 						memset(bann_buf,0,sizeof(bann_buf));
+> 						printf("\n 퇴장 투표할 사용자를 입력하시오: \n");
+> 						scanf("%s",bann_buf);
+> 						write(s,bann_buf,sizeof(bann_buf));
+> 						printf("퇴장 투표가 시작됩니다\n");
+> 						write(s,"OK",100);
+> 						memset(buf,0,MAXLINE);
+> 						read(s,buf, 20);
+> 						printf("퇴장 id : %s\n", bann_buf);
+> 						printf("찬성시 1 입력/ 반대 시 2입력\n");
+> 						memset(buf,0,MAXLINE);
+> 						scanf("%d", &vote_num);
+> 						sprintf(buf,"%d",vote_num);
+> 						write(s, buf, 100);
+> 						memset(buf,0,sizeof(bufmsg));
+> 					
+> 					//	read(s,buf, MAXLINE);
+> 						//bok
+> 					}	
+> 						//여기까지는 bann을 쓴 사람만 돌아간다.
+> 					else if(!strcmp(bufmsg,"ban")){
+> 						printf("퇴장 투표가 시작됩니다\n");
+> 						write(s,"OK",100);
+> 						memset(buf,0,MAXLINE);
+> 						read(s,buf, 20);
+> 						printf("퇴장 id : %s\n", buf);
+> 						printf("찬성시 1 입력/ 반대 시 2입력\n");
+> 						memset(buf,0,MAXLINE);
+> 						scanf("%d", &vote_num);
+> 						sprintf(buf,"%d",vote_num);
+> 						write(s, buf, 100);
+> 						memset(buf,0,sizeof(bufmsg));
+> 					}
+> 					else{
+> 						bufmsg[nbyte] = 0;
+> 						printf("%s \n", bufmsg);
+> 						memset(bufmsg,0,MAXLINE);
+> 					}
+183,185d223
+< 									if(User->chat_num){
+< 										printf("%d번, %s 채팅방에 오신 것을 환영합니다!\n",User->chat_num,User->c_name);
+< 										printf("-------------------------------------------\n");													}
+204,207c242
+< 						memset(User->c_name,0, sizeof(User->c_name));
+< 						printf("채팅방에서 나갑니다. 안녕히가세요!\n");
+< 						printf("-------------------------------------------\n");
+< 					}
+---
+> 					}				
+271d305
+< 		strcpy(User->c_name, buf);
+286,287d319
+< 	char n_buf[MAX_BUF];
+< 	char *name_buf;
+307,311c339
+< 		strcpy(n_buf,strtok(buf, "\t"));
+< 		name_buf = strtok(NULL,"\t");
+< 		strcpy(User->c_name, name_buf);
+< 		
+< 		printf("Welcome to Chat_%d, %dst Member\n", num,atoi(n_buf));
+---
+> 		printf("Welcome to Chat_%d, %dst Member\n", num,atoi(buf));
