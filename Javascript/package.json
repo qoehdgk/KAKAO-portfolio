@@ -12,7 +12,7 @@
     "@react-native-community/async-storage": "^1.5.1",
     "@react-native-community/slider": "^2.0.2",
     "@react-native-maps/polyline-direction": "^1.0.0",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "expo": "^33.0.0",
     "expo-cli": "^3.4.1",
     "expo-linear-gradient": "^6.0.0",
